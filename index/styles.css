@@ -1,0 +1,36 @@
+/* Some styles partially taken from Yusef.plugins.ui - http://dev.opera.com/articles/view/yusef-the-unite-server-framework/ */
+
+html, body, ul, li, a { margin:0; padding:0; border:0; font-family:arial,sans-serif; font-size:13px; }
+body{ font-size:0.8em; color:#000; background:#fff; }
+a{ color:#176280; text-decoration:none; }
+a:hover{ text-decoration:underline; }
+
+/* nav */
+header{ display:block; background-color:#dd2000; }
+header, #nav li a{ background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIQAAAC%2BCAYAAAD0padsAAADVklEQVR42u3dv04UURTA4TPLEAilS9RqKSitNhItrEhMTCx4CJ6EZ7DQNzDhBawsbIx%2FosRozQOYQGFBs8WOhe7OnhWYYUkYkO9rlIrk7o9z5%2B7itRgOh1XAX2VV6QFBIAja6FkCTAgEgSAQBIJAEAgCQSAIOuedSkwIBIEgEASCQBAIAkHQCW9MkRQvXr18bRmYBmHLwJaBIBAEguDSD5Wbg40HloFpEIeHh44ZTJVra2tWgTqI1dVVq0AdxMrKilWgDqIsS6tAHcTS0pJVoA6iKAqrQH3s3Nraqra3t60Esb%2B%2FH%2BXJyUn4xJOIiNFoFD0xMFFVVZSTv0CED7eYP2VUVWVCYMvAhKDFhPAMQZ4QtgzSM4QtA8dOnDJoOSHEgAmBZwhaHjudMpjdMkwI8oTwDEF6qLRl4KESEwLPEDhlcOkJcX99%2FdfOzs57S8H3g4MnxeZg41tEPLUcRMRbWwaOnQgCQbDQKSMiliPinqUgIpbdQkeeEG6hIwXhFjpSEG6hIwXhFjpSEG6hIwXhFjpmFYPBoOr3%2B1aCOD4%2BjnI0GvkFGSLizy10foWOKf%2BUj3%2F4cIt8yrBlYMvAhMCEwITAhMCEwITAhKCLCeGdSvKEsGVgy8BDJSYEJgQmBCYEJgRXNCG8MUWeEHfv9H88fPzouaXg66fPb8pqPC6%2FfPi4bjmIiNKWQSIIBIEgEASLcAsd%2BZjhFjpSEG6hIwXhFjpSEG6hIwXhFjpSEG6hIx07h8OhYyf1hPDLMQgCQdCOzzIwIRAEgkAQCAJBIAgEgSDonncqMSEQBIJAEAgCQSAIBEEnvDFFnhC7u7vvLAMTxeZg45llwJaBIBAEguBSp4yjo6OfloHpKaPpFrrxeDz97xNm38Sa3Ctx1p9cjfnXpum16vXO3xQab6Gb%2Ff80TvsmYrh%2BUZwXRNNr1HgL3Wnf7LQoBNF9EGd9fZEf2la30DV93iGE6xnGIq9T61vo5r%2BZCG5WHG1fL7fQkYPwk868PUvApAXvVJIIAkEgCASBIBAEgkAQCAJBIAgEgSAQBIJAEAgCQSAIBAGCQBAIAkEgCASBIBAEgqAjbqG74dxCR2MU5wXhFrpbFMRZX1%2Fkh9YtdP9xGIu8Tm6huyVxuIWOhbiFjuQ3EcMZ9PFP2fEAAAAASUVORK5CYII%3D"); }
+header{ background-position:top left; background-repeat:repeat-x; position:relative; height:38px; }
+#nav{ max-width:960px; margin:auto; position:absolute; top:0; left:0; right:0; width:100%; }
+#nav li{ list-style-type:none; float:left; }
+#nav li a{ color:#fff; display:block; width:131px; text-align:center; height:38px; line-height:26px; background-position:0 -76px; background-repeat:repeat-x; color:#fff; text-decoration:none; overflow:hidden; -o-text-overflow:ellipsis; text-overflow:ellipsis; white-space:nowrap; }
+#nav li a:hover, #nav li.active a{ background-position:0 -38px; }
+
+/* == END Yusef styles */
+
+/* content */
+#faketoolbar{ margin:50px auto; height:30px; width:30px; padding:5px; background:-o-skin("Addressbar Skin"); font-size:1.2em; }
+.button{ display:block; background:-o-skin("Panel Widgets"); height:30px; width:30px; cursor:pointer; content:''; }
+.button:hover{ opacity:0.8; }
+
+#faketoolbar:after{
+  display:block;
+  content:'This is a toolbar button';
+  width:200px;
+  height:15px;
+  margin:20px 0 0 -100px;
+  border:1px solid #ccc;
+  border-radius:10px;
+  padding:30px 20px;
+  text-align:center;
+}
+
+#faketoolbar:hover:after{ content:'Drag it to any Opera toolbar'; }
