@@ -16,8 +16,6 @@ var output={
 
   css:function(e){ output.file(appDir.resolve('index/styles.css'),e.connection.response,'text/css',1); },
 
-  es:function(e){ output.file(appDir.resolve('index/script.es'),e.connection.response,'application/ecmascript',1); },
-  
   widgetise:function(r,filename){
     var widg=dir.resolve(filename);
     if(widg){ output.file(widg,r,'application/x-opera-widgets',1); }else{ r.close(); dir.deleteDirectory(widg,1); }
