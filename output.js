@@ -16,8 +16,15 @@ var output={
 
   css:function(e){ output.file(appDir.resolve('index/styles.css'),e.connection.response,'text/css',1); },
 
-  widgetise:function(r,filename){
+  widget:function(r,filename){
     var widg=dir.resolve(filename);
-    if(widg){ output.file(widg,r,'application/x-opera-widgets',1); }else{ r.close(); dir.deleteDirectory(widg,1); }
+    if(widg.exists){
+      r.setResponseHeader('content-disposition','attachment;filename='+filename);
+      output.file(widg,r,'application/x-opera-widgets',1);
+    }
+    r.close();
+    
+    /* give the user 2 minutes to click through the installation dialogues before deleting the widget installer */
+    window.setTimeout(function(){dir.deleteFile(widg);},120000);
   }
 };
