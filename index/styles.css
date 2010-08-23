@@ -12,7 +12,7 @@ header{ background-position:top left; background-repeat:repeat-x; position:relat
 #nav{ max-width:960px; margin:auto; position:absolute; top:0; left:0; right:0; width:100%; }
 #nav li{ list-style-type:none; float:left; }
 #nav li a{ color:#fff; display:block; width:131px; text-align:center; height:38px; line-height:26px; background-position:0 -76px; background-repeat:repeat-x; color:#fff; text-decoration:none; overflow:hidden; -o-text-overflow:ellipsis; text-overflow:ellipsis; white-space:nowrap; }
-#nav li a:hover, #nav li.active a{ background-position:0 -38px; }
+#nav li a:hover, #nav.base #baselink,#nav.new #newlink{ background-position:0 -38px; }
 
 /* == END Yusef styles */
 

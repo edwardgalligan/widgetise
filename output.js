@@ -1,31 +1,31 @@
+const _READ=opera.io.filemode.READ;
+
 var output=
 {
-  file:function(file, response, mime, c)
+  file:function(file, response, mime, closeConn)
   {
     if(file.exists)
     {
       response.setResponseHeader('content-type', mime);
       response.writeFile(file);
     }
-    if(c){ response.close(); }
+    if(closeConn){ response.close(); }
   },
 
-  page:function(r, content, t)
+  page:function(r, file, template)
   {
-    var f=appDir.resolve('index/header.xhtml');
-    if(template)
-    {
-      var markup=f.open(null, opera.io.filemode.READ).read(f.fileSize, 'utf-8');
-      for(var k in template){ markup=markup.replace('{{'+k+'}}', template[k]); }
-      
-      r.write(markup);
-    }else
-    {
-      this.file(f, r, 'application/xhtml+xml',0);
-    }
-    r.write(content);
-    r.write('</body></html>');
+    template.content=this.template(appDir.resolve('index/'+file+'.xhtml'), template);
+
+    r.setResponseHeader('content-type','application/xhtml+xml');
+    r.write( this.template(appDir.resolve('index/page.xhtml'), template) );
     r.close();
+  },
+
+  template:function(file, t)
+  { 
+    var text=file.open(null, _READ).read(file.fileSize, 'utf-8');
+    for(var k in t){ text=text.replace('{{'+k+'}}', t[k]); } 
+    return text;
   },
 
   css:function(e){ output.file(appDir.resolve('index/styles.css'), e.connection.response,'text/css',1); },
@@ -39,7 +39,7 @@ var output=
       output.file(widg, r, 'application/x-opera-widgets', 1);
     }
     r.close();
-    
+
     /* give the user 2 minutes to click through the installation dialogues before deleting the widget installer */
     window.setTimeout(function(){ dir.deleteFile(widg); }, 120000);
   }
