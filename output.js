@@ -1,6 +1,6 @@
 var output=
 {
-  file:function(file,response,mime,c)
+  file:function(file, response, mime, c)
   {
     if(file.exists)
     {
@@ -10,9 +10,19 @@ var output=
     if(c){ response.close(); }
   },
 
-  page:function(r,content)
+  page:function(r, content, t)
   {
-    this.file(appDir.resolve('index/header.xhtml'), r, 'application/xhtml+xml',0);
+    var f=appDir.resolve('index/header.xhtml');
+    if(template)
+    {
+      var markup=f.open(null, opera.io.filemode.READ).read(f.fileSize, 'utf-8');
+      for(var k in template){ markup=markup.replace('{{'+k+'}}', template[k]); }
+      
+      r.write(markup);
+    }else
+    {
+      this.file(f, r, 'application/xhtml+xml',0);
+    }
     r.write(content);
     r.write('</body></html>');
     r.close();
@@ -20,7 +30,7 @@ var output=
 
   css:function(e){ output.file(appDir.resolve('index/styles.css'), e.connection.response,'text/css',1); },
 
-  widget:function(r,filename)
+  widget:function(r, filename)
   {
     var widg=dir.resolve(filename);
     if(widg.exists)

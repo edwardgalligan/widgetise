@@ -34,7 +34,11 @@ function index(e){
             '})({},{});',
           '%22,1,,%22Panel%20Widgets%22">WIDGETISE</a>',
         '</div>'
-      ].join('')
+      ].join(''),
+      {
+        baseactive:' class="active"',
+        newactive: ''
+      }
     );
   }
 }
