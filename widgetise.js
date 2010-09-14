@@ -1,3 +1,5 @@
+console={log:opera.postError};
+
 var widgetise=
 {
   config:function(w)
@@ -7,9 +9,10 @@ var widgetise=
       '<widget defaultmode="application" network="public">',
       '  <widgetname>'+w.name+'</widgetname>',
       '  <description>'+w.title+'</description>',
+      '  <icon>'+w.icon+'</icon>',
       '  <width>'+w.screen.w+'</width>',
       '  <height>'+w.screen.h+'</height>',
-      '  <author><name>'+opera.io.webserver.userName+'</name></author>',
+      '  <author><name>'+webserver.userName+'</name></author>',
       '</widget>'
     ].join("\n");
   },
@@ -29,20 +32,44 @@ var widgetise=
       '</html>'
     ].join("\n");
   },
-  
-  create:function(w)
+
+  create:function(w, output)
   {
-    var zip=new JSZip();
-    var fname=w.name+'.wgt';
-    var stream=dir.resolve(fname).open(null, opera.io.filemode.WRITE);
-    var config=this.config(w);
-    var index=this.index(w);
+    w=JSON.parse(decodeURIComponent(w));
 
-    zip.add('config.xml', config).add('index.html', index);
+    this.icon(w, function(xicon)
+    {
+      w.icon='favicon.ico';
 
-    stream.writeBase64( zip.generate() );
-    stream.close();
-    
-    return fname;
+      var zip=new JSZip(),
+          filename=w.name+'.wgt',
+          stream=dir.resolve(filename).open(null, opera.io.filemode.WRITE);
+
+      zip.add('config.xml', widgetise.config(w)).add('index.html', widgetise.index(w));
+      if(xicon){ zip.add(w.icon, xicon); }
+
+      stream.writeBase64( zip.generate() );
+      stream.close();
+
+      output(filename);
+    });
+  },
+
+  icon:function(w,cb)
+  {
+    var x=new XMLHttpRequest();
+
+    if(!x.overrideMimeType){ console.log('Unite Widgetise Error: Binary AJAX ain\'t supported :('); cb(0); return; }
+
+    x.open('get', w.icon, 0);
+    x.overrideMimeType('text/plain;charset=x-user-defined');
+    x.send(null);
+    if( x.readyState==4 && '2002060'.indexOf(x.status)%3==0 ){ cb(window.btoa(x.responseText)); }
+    else
+    {
+      // probly a 404 or some such
+      console.log('Unite Widgetise Error: Site favicon not found');
+      cb(0);
+    }
   }
 };

@@ -14,21 +14,20 @@ var output=
 
   page:function(r, file, template)
   {
-    template.content=this.template(appDir.resolve('index/'+file+'.xhtml'), template);
+    template=template||{};
+    template.content=this.template(appDir.resolve('templates/'+file+'.xhtml'), template);
 
     r.setResponseHeader('content-type','application/xhtml+xml');
-    r.write( this.template(appDir.resolve('index/page.xhtml'), template) );
+    r.write( this.template(appDir.resolve('templates/page.xhtml'), template) );
     r.close();
   },
 
   template:function(file, t)
-  { 
+  {
     var text=file.open(null, _READ).read(file.fileSize, 'utf-8');
-    for(var k in t){ text=text.replace('{{'+k+'}}', t[k]); } 
+    for(var k in t){ text=text.replace('{{'+k+'}}', t[k]); }
     return text;
   },
-
-  css:function(e){ output.file(appDir.resolve('index/styles.css'), e.connection.response,'text/css',1); },
 
   widget:function(r, filename)
   {

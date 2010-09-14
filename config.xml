@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<widget id="http://unite.opera.com/application/652/" version="2.1">
-  <widgetname network="public private">widgetise</widgetname>
+<widget id="http://unite.opera.com/application/652/" version="2.1" network="public private">
+  <widgetname>widgetise</widgetname>
   <description>Converts webapps to Opera widgets - similar to Mozilla's Prism or Google Chrome's "application shortcuts"</description>
-  <icon>icon/128.png</icon>
   <icon>icon/64.png</icon>
   <icon>icon/32.png</icon>
   <icon>icon/16.png</icon>

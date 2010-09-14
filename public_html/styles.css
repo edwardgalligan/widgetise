@@ -1,6 +1,6 @@
 /* Some styles partially taken from Yusef.plugins.ui - http://dev.opera.com/articles/view/yusef-the-unite-server-framework/ */
 
-html, body, ul, li, a { margin:0; padding:0; border:0; font-family:arial,sans-serif; font-size:13px; }
+html, body, ul, li, a { margin:0; padding:0; border:0; font-family:arial,sans-serif; }
 body{ font-size:0.8em; color:#000; background:#fff; }
 a{ color:#176280; text-decoration:none; }
 a:hover{ text-decoration:underline; }
@@ -16,7 +16,7 @@ header{ background-position:top left; background-repeat:repeat-x; position:relat
 
 /* == END Yusef styles */
 
-/* content */
+/* button page content */
 #faketoolbar{ margin:50px auto; height:30px; width:30px; padding:5px; background:-o-skin("Addressbar Skin"); font-size:1.2em; }
 .button{ display:block; background:-o-skin("Panel Widgets"); height:30px; width:30px; cursor:pointer; content:''; }
 .button:hover{ opacity:0.8; }
@@ -34,3 +34,13 @@ header{ background-position:top left; background-repeat:repeat-x; position:relat
 }
 
 #faketoolbar:hover:after{ content:'Drag it to any Opera toolbar'; }
+/* end button page content */
+
+/* new widget page form */
+
+form dl{ background:#ddd; box-shadow:2px 2px 5px #000; border-radius:15px 15px 5px 5px; width:60%; margin:3em auto; padding:4em 0; text-transform:lowercase; }
+form dd, form dt{ width:70%; margin:0 auto; }
+form label{ font-size:0.5em; background:#d8d8d8; padding:0.1em 1em; border-radius:8px 8px 0 0; }
+form input{ font-size:1.6em; margin:0 0 1em 0; background:#d8d8d8; border:dotted #d8d8d8; border-radius:0 8px 8px 8px; border-width:0 0 3px 0; padding:0 0 0 .2em; }
+form input:focus{ background:transparent; border-radius:0; color:#c00; border-color:#c00; }
+
