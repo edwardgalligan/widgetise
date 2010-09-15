@@ -1,5 +1,3 @@
-console={log:opera.postError};
-
 var widgetise=
 {
   config:function(w)
@@ -10,8 +8,8 @@ var widgetise=
       '  <widgetname>'+w.name+'</widgetname>',
       '  <description>'+w.title+'</description>',
       '  <icon>'+w.icon+'</icon>',
-      '  <width>'+w.screen.w+'</width>',
-      '  <height>'+w.screen.h+'</height>',
+      '  <width>'+w.width+'</width>',
+      '  <height>'+w.height+'</height>',
       '  <author><name>'+webserver.userName+'</name></author>',
       '</widget>'
     ].join("\n");
@@ -33,26 +31,30 @@ var widgetise=
     ].join("\n");
   },
 
-  create:function(w, output)
+  create:function(query, output)
   {
-    w=JSON.parse(decodeURIComponent(w));
+    var k,w={};
+    for(k in query){ w[k]=query[k][0]; }
 
-    this.icon(w, function(xicon)
-    {
-      w.icon='favicon.ico';
+    this.icon(
+      w,
+      function(xicon)
+      {
+        w.icon='favicon.ico';
 
-      var zip=new JSZip(),
-          filename=w.name+'.wgt',
-          stream=dir.resolve(filename).open(null, opera.io.filemode.WRITE);
+        var zip=new JSZip(),
+            filename=w.name+'.wgt',
+            stream=dir.resolve(filename).open(null, opera.io.filemode.WRITE);
 
-      zip.add('config.xml', widgetise.config(w)).add('index.html', widgetise.index(w));
-      if(xicon){ zip.add(w.icon, xicon); }
+        zip.add('config.xml', widgetise.config(w)).add('index.html', widgetise.index(w));
+        if(xicon){ zip.add(w.icon, xicon); }
 
-      stream.writeBase64( zip.generate() );
-      stream.close();
+        stream.writeBase64( zip.generate() );
+        stream.close();
 
-      output(filename);
-    });
+        output(filename);
+      }
+    );
   },
 
   icon:function(w,cb)
@@ -65,11 +67,6 @@ var widgetise=
     x.overrideMimeType('text/plain;charset=x-user-defined');
     x.send(null);
     if( x.readyState==4 && '2002060'.indexOf(x.status)%3==0 ){ cb(window.btoa(x.responseText)); }
-    else
-    {
-      // probly a 404 or some such
-      console.log('Unite Widgetise Error: Site favicon not found');
-      cb(0);
-    }
+    else{ cb(0); } // probly a 404 or some such
   }
 };

@@ -18,6 +18,6 @@ function widgetisePage(e, page)
 
   if(!e.connection.isLocal){ response.write('Sorry, this is a local application.'); response.close(); return; }
 
-  if(request.queryItems.w){ widgetise.create( request.queryItems.w[0], function(w){ output.widget(response, w); } ); }
+  if(request.queryItems.w){ widgetise.create( request.queryItems, function(widgetfile){ output.widget(response, widgetfile); } ); }
   else{ output.page( response, page ); }
 }
